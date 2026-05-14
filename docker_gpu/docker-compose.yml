@@ -1,0 +1,25 @@
+services:
+
+  ml_gpu:
+    image: ml_gpu:v1.0
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: ml_gpu
+
+    gpus: all
+
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+
+    volumes:
+      - /mnt/c/workspace:/workspace
+
+    working_dir: /workspace
+
+    stdin_open: true
+    tty: true
+
+    shm_size: "8gb"
