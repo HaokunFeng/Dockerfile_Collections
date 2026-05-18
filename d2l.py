@@ -1,9 +1,11 @@
 from matplotlib_inline import backend_inline
 from matplotlib import pyplot as plt
+from torch.utils import data
 import time
 import numpy as np
 import torch
 import random
+
 
 # visualization
 # --------------------------------------------------------------------------
@@ -101,6 +103,11 @@ def data_iter(batch_size, features, labels):
             indices[i : min(i + batch_size, num_examples)]
         )
         yield features[batch_indices], labels[batch_indices]
+
+def load_array(data_arrays, batch_size, is_train=True):
+    """构造一个PyTorch数据迭代器"""
+    dataset = data.TensorDataset(*data_arrays)
+    return data.DataLoader(dataset, batch_size, shuffle=is_train)
 
 # model
 # --------------------------------------------------------------------------
